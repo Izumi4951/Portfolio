@@ -1,0 +1,394 @@
+/* ==========================================================================
+   1. VARIABLES & THEMES
+   ========================================================================== */
+:root {
+    --accent-pastel: #8ecae6;
+    --accent-hover: #219ebc;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f141c;
+    --bg-secondary: #161f2d;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --card-shadow: rgba(148, 163, 184, 0.08);
+    --border-color: rgba(0, 0, 0, 0.05);
+    --accent-pastel: #219ebc;
+    --accent-hover: #023047;
+}
+
+/* ==========================================================================
+   2. BASE STYLES & RESET
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.section-title {
+    font-size: 2rem;
+    position: relative;
+    margin-bottom: 2.5rem;
+    color: var(--text-main);
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-pastel);
+    border-radius: 2px;
+}
+
+/* ==========================================================================
+   3. NAVIGATION BAR
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(var(--bg-primary), 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--accent-pastel);
+    letter-spacing: 0.05em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:hover {
+    color: var(--accent-pastel);
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.theme-btn:hover {
+    color: var(--accent-pastel);
+    background-color: var(--border-color);
+}
+
+[data-theme="dark"] .sun-icon { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
+[data-theme="light"] .sun-icon { display: none; }
+[data-theme="light"] .moon-icon { display: block; }
+
+/* ==========================================================================
+   4. HERO SECTION
+   ========================================================================== */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    background: radial-gradient(circle at 90% 10%, rgba(142, 202, 230, 0.03), transparent 40%);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.hero-content .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
+    font-weight: 300;
+}
+
+.hero-content .divider {
+    color: var(--accent-pastel);
+    margin: 0 0.5rem;
+    font-weight: 400;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--accent-pastel);
+    color: var(--accent-pastel);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    font-weight: 500;
+    background: transparent;
+    transition: var(--transition-smooth);
+}
+
+.cta-btn:hover {
+    background: var(--accent-pastel);
+    color: var(--bg-primary);
+    box-shadow: 0 8px 20px rgba(142, 202, 230, 0.15);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   5. SECTIONS COMMON LAYOUT
+   ========================================================================== */
+section {
+    padding: 7rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   6. ABOUT ME SECTION
+   ========================================================================== */
+.about-content {
+    max-width: 750px;
+    color: var(--text-muted);
+}
+
+.about-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   7. SKILLS SECTION
+   ========================================================================== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    transition: var(--transition-smooth);
+}
+
+.skill-card h3 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.skill-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-pastel);
+    box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+/* ==========================================================================
+   8. ACHIEVEMENTS SECTION
+   ========================================================================== */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.achievement-item {
+    display: flex;
+    gap: 3rem;
+    background-color: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px var(--card-shadow);
+    transition: var(--transition-smooth);
+}
+
+.achievement-item:hover {
+    border-color: rgba(142, 202, 230, 0.3);
+    transform: translateX(4px);
+}
+
+.achievement-item .year {
+    font-weight: 600;
+    color: var(--accent-pastel);
+    font-size: 1.1rem;
+    min-width: 70px;
+}
+
+.achievement-detail h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.achievement-detail p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   9. CONTACT SECTION
+   ========================================================================== */
+.contact-lead {
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 1.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    transition: var(--transition-smooth);
+}
+
+.contact-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-pastel);
+    margin-bottom: 0.5rem;
+}
+
+.contact-value {
+    font-size: 1rem;
+    color: var(--text-main);
+    word-break: break-all;
+}
+
+.contact-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-pastel);
+    box-shadow: 0 12px 24px var(--card-shadow);
+}
+
+/* ==========================================================================
+   10. FOOTER
+   ========================================================================== */
+.footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   11. ANIMATIONS & SCROLL UTILITIES
+   ========================================================================== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   12. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    html { font-size: 15px; }
+    .hero-content h1 { font-size: 2.6rem; }
+    .hero-content .subtitle { font-size: 1rem; }
+    .hero-content .divider { display: block; margin: 0.3rem 0; opacity: 0; }
+    .achievement-item {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem;
+    }
+    section { padding: 5rem 0; }
+    .nav-links a:not(.theme-btn) { display: none; }
+}
